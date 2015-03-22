@@ -21,34 +21,34 @@
 using namespace std;
 
 class Solution {
-	public:
-	void sortColors(int A[], int n) {
-		int left,right,cur;
-		left=0;
-		right=n-1;
-		for(cur=0; cur<=right;) {
-			if(A[cur]==0) {
-				swap(A[cur],A[left]);
-				left++;
-				cur++;
-			}
-			else if(A[cur]==2) {
-				swap(A[cur],A[right]);
-				right--;
-			}
-			else
-				cur++;
-		}
-	}
+    public:
+    void sortColors(int A[], int n) {
+        int left,right,cur;
+        left=0;
+        right=n-1;
+        for(cur=0; cur<=right;) {
+            if(A[cur]==0) {
+                swap(A[cur],A[left]);
+                left++;
+                cur++;
+            }
+            else if(A[cur]==2) {
+                swap(A[cur],A[right]);
+                right--;
+            }
+            else
+                cur++;
+        }
+    }
 };
 
 int main() {
-	int A[]={0,1,2,0,1,2};
-	Solution solu;
+    int A[]={0,1,2,0,1,2};
+    Solution solu;
 
-	solu.sortColors(A,6);
-	for(int i=0; i<6; ++i)
-		cout<<A[i]<<" ";
-	cout<<endl;
-	return 0;
+    solu.sortColors(A,6);
+    for(int i=0; i<6; ++i)
+        cout<<A[i]<<" ";
+    cout<<endl;
+    return 0;
 }

@@ -19,70 +19,70 @@
 using namespace std;
 
 class Interval {
-	public:
-	int start;
-	int end;
-	Interval() : start(0), end(0) {}
-	Interval(int s, int e) : start(s), end(e) {}
+    public:
+    int start;
+    int end;
+    Interval() : start(0), end(0) {}
+    Interval(int s, int e) : start(s), end(e) {}
 };
 
 class Solution {
-	public:
-		vector<Interval> insert(vector<Interval> &intervals, Interval newInterval) {
-			vector<Interval> result;
-			int i;
-			
-			if(intervals.empty()) {
-				result.push_back(newInterval);
-				return result;
-			}
-			i=0;
-			while(i<intervals.size()) {
-				if(intervals[i].end < newInterval.start) {
-					result.push_back(intervals[i]);
-					i++;
-				}
-				else {
-					if(intervals[i].start > newInterval.end) {
-						result.push_back(newInterval);
-						break;
-					}
-					if(intervals[i].end >= newInterval.end) {
-						intervals[i].start = min(intervals[i].start, newInterval.start);
-						break;
-					}
-					newInterval.start = min(intervals[i].start, newInterval.start);
-					i++;
-				}
-			}
-			if(i==intervals.size())
-				result.push_back(newInterval);
-			else
-				for(;i<intervals.size(); ++i)
-					result.push_back(intervals[i]);
-			return result;
-		}
+    public:
+        vector<Interval> insert(vector<Interval> &intervals, Interval newInterval) {
+            vector<Interval> result;
+            int i;
+            
+            if(intervals.empty()) {
+                result.push_back(newInterval);
+                return result;
+            }
+            i=0;
+            while(i<intervals.size()) {
+                if(intervals[i].end < newInterval.start) {
+                    result.push_back(intervals[i]);
+                    i++;
+                }
+                else {
+                    if(intervals[i].start > newInterval.end) {
+                        result.push_back(newInterval);
+                        break;
+                    }
+                    if(intervals[i].end >= newInterval.end) {
+                        intervals[i].start = min(intervals[i].start, newInterval.start);
+                        break;
+                    }
+                    newInterval.start = min(intervals[i].start, newInterval.start);
+                    i++;
+                }
+            }
+            if(i==intervals.size())
+                result.push_back(newInterval);
+            else
+                for(;i<intervals.size(); ++i)
+                    result.push_back(intervals[i]);
+            return result;
+        }
 };
 
 int main() {
-	Interval a1(1,2);
-	Interval a2(3,5);
-	Interval a3(6,7);
-	Interval a4(8,10);
-	Interval a5(12,16);
-	Interval newone(2,3);
-	Solution solu;
-	vector<Interval> input;
-	vector<Interval> result;
+    Interval a1(1,2);
+    Interval a2(3,5);
+    Interval a3(6,7);
+    Interval a4(8,10);
+    Interval a5(12,16);
+    Interval newone(2,3);
+    Solution solu;
+    vector<Interval> input;
+    vector<Interval> result;
 
-	input.push_back(a1);
-	input.push_back(a2);
-	input.push_back(a3);
-	input.push_back(a4);
-	input.push_back(a5);
-	result = solu.insert(input, newone);
-	for(int i=0; i<result.size(); ++i) {
-		cout<<result[i].start<<" "<<result[i].end<<endl;
-	}
-	return 0;
+    input.push_back(a1);
+    input.push_back(a2);
+    input.push_back(a3);
+    input.push_back(a4);
+    input.push_back(a5);
+    result = solu.insert(input, newone);
+    for(int i=0; i<result.size(); ++i) {
+        cout<<result[i].start<<" "<<result[i].end<<endl;
+    }
+    return 0;
 }

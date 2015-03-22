@@ -17,37 +17,37 @@ Try to do this in one pass.
 using namespace std;
 
 class ListNode {
-	int val;
-	ListNode* next;
-	ListNode(int x): val(x),next(NULL){}
+    int val;
+    ListNode* next;
+    ListNode(int x): val(x),next(NULL){}
 };
 
 class Solution {
-	public:
-	ListNode *removeNthFromEnd(ListNode *head, int n) {
-		ListNode *p,*q,*temp;
-		int i;
-		
-		if(head == NULL || n<1)
-			return head;
-		temp=head;
-		for(i=1;i<n;++i){
-			temp=temp->next;
-		}
-		p=head;
-		q=head;
-		if(temp->next == NULL)
-			return head->next;
-		else {
-			q=head->next;
-			temp=temp->next;
-			while(temp->next!=NULL){
-				temp=temp->next;
-				q=q->next;
-				p=p->next;
-			}
-			p->next=q->next;
-			return head;
-		}
-	}
+    public:
+    ListNode *removeNthFromEnd(ListNode *head, int n) {
+        ListNode *p,*q,*temp;
+        int i;
+        
+        if(head == NULL || n<1)
+            return head;
+        temp=head;
+        for(i=1;i<n;++i){
+            temp=temp->next;
+        }
+        p=head;
+        q=head;
+        if(temp->next == NULL)
+            return head->next;
+        else {
+            q=head->next;
+            temp=temp->next;
+            while(temp->next!=NULL){
+                temp=temp->next;
+                q=q->next;
+                p=p->next;
+            }
+            p->next=q->next;
+            return head;
+        }
+    }
 };

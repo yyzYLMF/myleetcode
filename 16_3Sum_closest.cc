@@ -15,66 +15,66 @@ The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
 using namespace std;
 
 class Solution {
-	public:
-	typedef vector<int>::iterator index;
-	int twoSumDiff(index head, index tail, int target) {
-		int diff;
-		int value;
+    public:
+    typedef vector<int>::iterator index;
+    int twoSumDiff(index head, index tail, int target) {
+        int diff;
+        int value;
 
-		diff = target - (*head+*tail);
-		while(head < tail) {
-			value = *head + *tail;
-			if(value == target) {
-				return 0;
-			}
-			else if(value > target) {
-				if(abs(target-value) < abs(diff))
-					diff = target-value;
-				tail--;
-			}
-			else if(value < target) {
-				if(abs(target-value) < abs(diff))
-					diff = target -value;
-				head++;
-			}
-		}
-		return diff;
-	}
+        diff = target - (*head+*tail);
+        while(head < tail) {
+            value = *head + *tail;
+            if(value == target) {
+                return 0;
+            }
+            else if(value > target) {
+                if(abs(target-value) < abs(diff))
+                    diff = target-value;
+                tail--;
+            }
+            else if(value < target) {
+                if(abs(target-value) < abs(diff))
+                    diff = target -value;
+                head++;
+            }
+        }
+        return diff;
+    }
 
-	int threeSumClosest(vector<int> &num, int target) {
-		vector<int> copy(num);
-		int diff,temp;
-		index p;
+    int threeSumClosest(vector<int> &num, int target) {
+        vector<int> copy(num);
+        int diff,temp;
+        index p;
 
-		if(num.size() < 3)
-			return -1;
+        if(num.size() < 3)
+            return -1;
 
-		sort(copy.begin(), copy.end());
-		diff = target - (copy[0]+copy[1]+copy[2]);
-		for(p=copy.begin(); p+3<=copy.end(); ++p) {
-			if(p!=copy.begin() && *p==*(p-1))
-				continue;
-			temp = twoSumDiff(p+1, copy.end()-1, target-(*p));
-			if(temp == 0)
-				return target;
-			if(abs(temp) < abs(diff))
-				diff=temp;
-		}
-		return target-diff;
-	}
+        sort(copy.begin(), copy.end());
+        diff = target - (copy[0]+copy[1]+copy[2]);
+        for(p=copy.begin(); p+3<=copy.end(); ++p) {
+            if(p!=copy.begin() && *p==*(p-1))
+                continue;
+            temp = twoSumDiff(p+1, copy.end()-1, target-(*p));
+            if(temp == 0)
+                return target;
+            if(abs(temp) < abs(diff))
+                diff=temp;
+        }
+        return target-diff;
+    }
 };
 
 int main() {
-	Solution solu;
-	vector<int> num;
-	int result;
+    Solution solu;
+    vector<int> num;
+    int result;
 
-	num.push_back(-1);
-	num.push_back(2);
-	num.push_back(1);
-	num.push_back(-4);
+    num.push_back(-1);
+    num.push_back(2);
+    num.push_back(1);
+    num.push_back(-4);
 
-	result = solu.threeSumClosest(num, 1);
-	cout<<result<<endl;
-	return 0;
+    result = solu.threeSumClosest(num, 1);
+    cout<<result<<endl;
+    return 0;
 }

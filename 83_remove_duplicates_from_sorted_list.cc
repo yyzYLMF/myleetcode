@@ -12,48 +12,48 @@
 using namespace std;
 
 class ListNode {
-	public:
-	int val;
-	ListNode *next;
-	ListNode(int x): val(x), next(NULL){}
+    public:
+    int val;
+    ListNode *next;
+    ListNode(int x): val(x), next(NULL){}
 };
 
 class Solution {
-	public:
-	ListNode *deleteDuplicates(ListNode *head) {
-		ListNode *last,*p,*q;
+    public:
+    ListNode *deleteDuplicates(ListNode *head) {
+        ListNode *last,*p,*q;
 
-		if(head==NULL || head->next==NULL)
-			return head;
-		last=NULL;
-		p=head;
-		q=head->next;
-		while(q!=NULL) {
-			if(p->val != q->val) {
-				if(last!=NULL) {
-					last->next = p;
-					last=last->next;
-				}
-				else 
-					last=p;
-				p=q;
-				q=q->next;
-			}
-			else
-				q=q->next;
-		}
-		if(last!=NULL) {
-			last->next=p;
-			last=last->next;
-		}
-		else
-			last=p;
-		last->next=NULL;
-		return head;
-	}
+        if(head==NULL || head->next==NULL)
+            return head;
+        last=NULL;
+        p=head;
+        q=head->next;
+        while(q!=NULL) {
+            if(p->val != q->val) {
+                if(last!=NULL) {
+                    last->next = p;
+                    last=last->next;
+                }
+                else 
+                    last=p;
+                p=q;
+                q=q->next;
+            }
+            else
+                q=q->next;
+        }
+        if(last!=NULL) {
+            last->next=p;
+            last=last->next;
+        }
+        else
+            last=p;
+        last->next=NULL;
+        return head;
+    }
 };
 
 int main() {
-	Solution solu;
-	return 0;
+    Solution solu;
+    return 0;
 }

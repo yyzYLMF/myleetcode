@@ -14,45 +14,45 @@ using namespace std;
 
 //wrong answer, cant't deal with the duplicates num.
 class Solution {
-	public:
-	bool search(int A[], int n, int target) {
-		int low,high,mid;
-		low=0;
-		high=n-1;
-		while(low<=high) {
-			mid = (low+high)/2;
-			if(A[mid]==target)
-				return true;
-			else if(A[mid] > target) {
-				if(A[low] > target) {
-					if(A[mid]>A[low])
-						low=mid+1;
-					else if(A[mid]<A[low])
-						high=mid-1;
-					else
-						low++;
-				}
-				else
-					high=mid-1;
-			}
-			else if(A[mid] < target) {
-				if(A[high] < target) {
-					if(A[high]>A[mid])
-						high=mid-1;
-					else if(A[high]<A[mid])
-						low=mid+1;
-					else
-						high--;
-				}
-				else
-					low=mid+1;
-			}
-		}
-		return false;
-	}
+    public:
+    bool search(int A[], int n, int target) {
+        int low,high,mid;
+        low=0;
+        high=n-1;
+        while(low<=high) {
+            mid = (low+high)/2;
+            if(A[mid]==target)
+                return true;
+            else if(A[mid] > target) {
+                if(A[low] > target) {
+                    if(A[mid]>A[low])
+                        low=mid+1;
+                    else if(A[mid]<A[low])
+                        high=mid-1;
+                    else
+                        low++;
+                }
+                else
+                    high=mid-1;
+            }
+            else if(A[mid] < target) {
+                if(A[high] < target) {
+                    if(A[high]>A[mid])
+                        high=mid-1;
+                    else if(A[high]<A[mid])
+                        low=mid+1;
+                    else
+                        high--;
+                }
+                else
+                    low=mid+1;
+            }
+        }
+        return false;
+    }
 };
 
 int main() {
-	Solution solu;
-	return 0;
+    Solution solu;
+    return 0;
 }

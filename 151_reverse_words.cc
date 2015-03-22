@@ -4,27 +4,27 @@
 using namespace std;
 
 class Solution {
-	public:
-		void reverseWords(string &s) {
-			istringstream is(s);
-			string tmp="";
-			string out="";
-			while(is>>tmp){
-				tmp+=" ";
-				tmp+=out;
-				out=tmp;
-			}
-			s=out.substr(0,out.length()-1);
-			cout<<"s: "<<s.length()<<endl;
-		}
+    public:
+        void reverseWords(string &s) {
+            istringstream is(s);
+            string tmp="";
+            string out="";
+            while(is>>tmp){
+                tmp+=" ";
+                tmp+=out;
+                out=tmp;
+            }
+            s=out.substr(0,out.length()-1);
+            cout<<"s: "<<s.length()<<endl;
+        }
 };
 
 int main()
 {
-	string s;
-	Solution solu;
-	getline(cin,s);
+    string s;
+    Solution solu;
+    getline(cin,s);
 
-	solu.reverseWords(s);
-	return 0;
+    solu.reverseWords(s);
+    return 0;
 }

@@ -15,31 +15,31 @@
 using namespace std;
 
 class Solution {
-	public:
-		int lengthOfLastWord(const char *s) {
-			const char *p=s;
-			int length=0,temp=0;
+    public:
+        int lengthOfLastWord(const char *s) {
+            const char *p=s;
+            int length=0,temp=0;
 
-			if(*s == '\0')
-				return 0;
-			while(*p != '\0') {
-				if(*p == ' ') {
-					if(length>0)
-						temp =length;
-					length = 0;
-				}
-				else 
-					length++;
-				p++;
-			}
-			return length ? length:temp;
-		}
+            if(*s == '\0')
+                return 0;
+            while(*p != '\0') {
+                if(*p == ' ') {
+                    if(length>0)
+                        temp =length;
+                    length = 0;
+                }
+                else 
+                    length++;
+                p++;
+            }
+            return length ? length:temp;
+        }
 };
 
 int main() {
-	char s[]="Helo ";
-	Solution solu;
+    char s[]="Helo ";
+    Solution solu;
 
-	cout<<solu.lengthOfLastWord(s)<<endl;
-	return 0;
+    cout<<solu.lengthOfLastWord(s)<<endl;
+    return 0;
 }

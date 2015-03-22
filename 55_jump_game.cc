@@ -17,32 +17,32 @@ A = [3,2,1,0,4], return false.
 using namespace std;
 
 class Solution {
-	public:
-	bool canJump(int A[], int n) {
-		int i=0,j,max,max_index;
-		if(n<=1)
-			return true;
-		while(i<n) {
-			if(i+A[i] >= n-1)
-				return true;
-			if(A[i] == 0)
-				return false;
-			max=0;
-			for(j=1; j<=A[i]; ++j) {
-				if(i+j+A[i+j] > max) {
-					max = i+j+A[i+j];
-					max_index = j;
-				}
-			}
-			i=i+max_index;
-		}
-	}
+    public:
+    bool canJump(int A[], int n) {
+        int i=0,j,max,max_index;
+        if(n<=1)
+            return true;
+        while(i<n) {
+            if(i+A[i] >= n-1)
+                return true;
+            if(A[i] == 0)
+                return false;
+            max=0;
+            for(j=1; j<=A[i]; ++j) {
+                if(i+j+A[i+j] > max) {
+                    max = i+j+A[i+j];
+                    max_index = j;
+                }
+            }
+            i=i+max_index;
+        }
+    }
 };
 
 int main() {
-	int a[]={3,2,1,0,4};
-	Solution solu;
+    int a[]={3,2,1,0,4};
+    Solution solu;
 
-	cout<<solu.canJump(a,5)<<endl;
-	return 0;
+    cout<<solu.canJump(a,5)<<endl;
+    return 0;
 }

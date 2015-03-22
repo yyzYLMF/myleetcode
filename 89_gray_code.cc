@@ -24,43 +24,43 @@
 using namespace std;
 
 class Solution {
-	public:
-	vector<int> grayCode(int n) {
-		vector<bitset<32> > store;
-		vector<int> result;
-		int i,j;
+    public:
+    vector<int> grayCode(int n) {
+        vector<bitset<32> > store;
+        vector<int> result;
+        int i,j;
 
-		if(n<=0) {
-			result.push_back(0);
-			return result;
-		}
-		bitset<32> temp0(0),temp1(1);
-		store.push_back(temp0);
-		store.push_back(temp1);
-		for(i=2;i<=n;++i) {
-			for(j=store.size()-1; j>=0; --j) {
-				bitset<32> tmp(store[j]);
-				tmp.set(i-1);
-				store.push_back(tmp);
-			}
-		}
-		for(i=0; i<store.size(); ++i) {
-			result.push_back(store[i].to_ulong());
-		}
-		return result;
-	}
+        if(n<=0) {
+            result.push_back(0);
+            return result;
+        }
+        bitset<32> temp0(0),temp1(1);
+        store.push_back(temp0);
+        store.push_back(temp1);
+        for(i=2;i<=n;++i) {
+            for(j=store.size()-1; j>=0; --j) {
+                bitset<32> tmp(store[j]);
+                tmp.set(i-1);
+                store.push_back(tmp);
+            }
+        }
+        for(i=0; i<store.size(); ++i) {
+            result.push_back(store[i].to_ulong());
+        }
+        return result;
+    }
 };
 
 int main() {
-	vector<int> result;
-	int n;
-	Solution solu;
+    vector<int> result;
+    int n;
+    Solution solu;
 
-	while(cin>>n) {
-		result = solu.grayCode(n);
-		for(int i=0; i<result.size(); ++i)
-			cout<<result[i]<<" ";
-		cout<<endl;
-	}
-	return 0;
+    while(cin>>n) {
+        result = solu.grayCode(n);
+        for(int i=0; i<result.size(); ++i)
+            cout<<result[i]<<" ";
+        cout<<endl;
+    }
+    return 0;
 }

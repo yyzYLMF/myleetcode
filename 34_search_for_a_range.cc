@@ -17,48 +17,48 @@ return [3, 4].
 using namespace std;
 
 class Solution {
-	public:
-	vector<int> searchRange(int A[], int n, int target) {
-		int low, high, mid;
-		vector<int> result;
+    public:
+    vector<int> searchRange(int A[], int n, int target) {
+        int low, high, mid;
+        vector<int> result;
 
-		low = 0;
-		high = n-1;
-		while(low<=high) {
-			mid = (low+high)/2;
-			if(A[mid] == target) {
-				if(A[low] == target && A[high] == target)
-					break;
-				if(A[low] != target)
-					low++;
-				if(A[high] != target)
-					high--;
-			}
-			else if(A[mid] > target) {
-				high = mid-1;
-			}
-			else if(A[mid] < target) {
-				low = mid+1;
-			}
-		}
-		if(low<=high) {
-			result.push_back(low);
-			result.push_back(high);
-		}
-		else {
-			result.push_back(-1);
-			result.push_back(-1);
-		}
-		return result;
-	}
+        low = 0;
+        high = n-1;
+        while(low<=high) {
+            mid = (low+high)/2;
+            if(A[mid] == target) {
+                if(A[low] == target && A[high] == target)
+                    break;
+                if(A[low] != target)
+                    low++;
+                if(A[high] != target)
+                    high--;
+            }
+            else if(A[mid] > target) {
+                high = mid-1;
+            }
+            else if(A[mid] < target) {
+                low = mid+1;
+            }
+        }
+        if(low<=high) {
+            result.push_back(low);
+            result.push_back(high);
+        }
+        else {
+            result.push_back(-1);
+            result.push_back(-1);
+        }
+        return result;
+    }
 };
 
 int main() {
-	int A[]={5,7,7,8,8,10};
-	Solution solu;
-	vector<int> result;
+    int A[]={5,7,7,8,8,10};
+    Solution solu;
+    vector<int> result;
 
-	result = solu.searchRange(A,6,9);
-	cout<<result[0]<<" "<<result[1]<<endl;
-	return 0;
+    result = solu.searchRange(A,6,9);
+    cout<<result[0]<<" "<<result[1]<<endl;
+    return 0;
 }

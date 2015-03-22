@@ -16,36 +16,36 @@ Your function should return length = 2, and A is now [1,2].
 using namespace std;
 
 class Solution {
-	public:
-	int removeDuplicates(int A[], int n) {
-		int *end_unique, *begin=A;
-		int result;
-		
-		if(A==NULL)
-			return 0;
-		else if(n==0 || n==1)
-			return n;
+    public:
+    int removeDuplicates(int A[], int n) {
+        int *end_unique, *begin=A;
+        int result;
+        
+        if(A==NULL)
+            return 0;
+        else if(n==0 || n==1)
+            return n;
 
-		end_unique = unique(A,A+n);
-		for(result = 0; result<n,begin!=end_unique; ++result)
-			begin++;
-		return result;
-	}
+        end_unique = unique(A,A+n);
+        for(result = 0; result<n,begin!=end_unique; ++result)
+            begin++;
+        return result;
+    }
 };
 
 int main() {
-	int a[10];
-	int result,i;
-	Solution solu;
+    int a[10];
+    int result,i;
+    Solution solu;
 
-	for(i=0;i<10;++i) {
-		a[i] = i/2;
-	}
+    for(i=0;i<10;++i) {
+        a[i] = i/2;
+    }
 
-	result = solu.removeDuplicates(a,10);
+    result = solu.removeDuplicates(a,10);
 
-	for(i=0;i<result;++i)
-		cout<<a[i]<<" ";
-	cout<<endl;
-	return 0;
+    for(i=0;i<result;++i)
+        cout<<a[i]<<" ";
+    cout<<endl;
+    return 0;
 }

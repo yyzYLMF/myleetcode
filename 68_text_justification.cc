@@ -30,77 +30,77 @@
 using namespace std;
 
 class Solution {
-	public:
-	vector<string> fullJustify(vector<string> &words, int L) {
-		vector<string> result;
-		int i=0,j,k,surplus,space,extra,add_more,count;
-		string temp;
+    public:
+    vector<string> fullJustify(vector<string> &words, int L) {
+        vector<string> result;
+        int i=0,j,k,surplus,space,extra,add_more,count;
+        string temp;
 
-		while(i<words.size()) {
-			surplus=L;
-			space=0;
-			temp="";
-			for(j=i; j<words.size(); ++j) {
-				if(j==i) {
-					temp = words[j];
-					space=1;
-					surplus = surplus - words[j].size();
-				}
-				else {
-					temp=temp + " " + words[j];
-					space++;
-					surplus = surplus - words[j].size()-1;
-				}
-				if(j+1 == words.size()) {
-					temp.insert(temp.end(), surplus, ' ');
-					break;
-				}
-				if(words[j+1].size()+1 > surplus) {
-					if(space > 1)
-						space--;
-					else if(space == 1) {
-						temp.insert(temp.end(), surplus, ' ');
-						break;
-					}
-					add_more = surplus%space;
-					extra = surplus/space;
-					count=0;
-					for(k=0;k<temp.size();++k) {
-						if(temp[k] == ' ') {
-							count++;
-							if(count<=add_more) {
-								temp.insert(k,extra+1,' ');
-								k+=extra+1;
-							}
-							else {
-								temp.insert(k,extra,' ');
-								k+=extra;
-							}
-						}
-					}
-					break;
-				}
-			}
-			result.push_back(temp);
-			j++;
-			i=j;
-		}
-		return result;
-	}
+        while(i<words.size()) {
+            surplus=L;
+            space=0;
+            temp="";
+            for(j=i; j<words.size(); ++j) {
+                if(j==i) {
+                    temp = words[j];
+                    space=1;
+                    surplus = surplus - words[j].size();
+                }
+                else {
+                    temp=temp + " " + words[j];
+                    space++;
+                    surplus = surplus - words[j].size()-1;
+                }
+                if(j+1 == words.size()) {
+                    temp.insert(temp.end(), surplus, ' ');
+                    break;
+                }
+                if(words[j+1].size()+1 > surplus) {
+                    if(space > 1)
+                        space--;
+                    else if(space == 1) {
+                        temp.insert(temp.end(), surplus, ' ');
+                        break;
+                    }
+                    add_more = surplus%space;
+                    extra = surplus/space;
+                    count=0;
+                    for(k=0;k<temp.size();++k) {
+                        if(temp[k] == ' ') {
+                            count++;
+                            if(count<=add_more) {
+                                temp.insert(k,extra+1,' ');
+                                k+=extra+1;
+                            }
+                            else {
+                                temp.insert(k,extra,' ');
+                                k+=extra;
+                            }
+                        }
+                    }
+                    break;
+                }
+            }
+            result.push_back(temp);
+            j++;
+            i=j;
+        }
+        return result;
+    }
 };
 
 int main() {
-	Solution solu;
-	vector<string> input,input2;
-	vector<string> result;
-	input.push_back("this");
-	input.push_back("is");
-	input.push_back("hello");
-	input.push_back("vector++string");
-	input.push_back("hello");
-	input2.push_back("");
-	result = solu.fullJustify(input2,2);
-	for(int i=0; i<result.size(); ++i)
-		cout<<result[i]<<"|"<<result[i].size()<<endl;
-	return 0;
+    Solution solu;
+    vector<string> input,input2;
+    vector<string> result;
+    input.push_back("this");
+    input.push_back("is");
+    input.push_back("hello");
+    input.push_back("vector++string");
+    input.push_back("hello");
+    input2.push_back("");
+    result = solu.fullJustify(input2,2);
+    for(int i=0; i<result.size(); ++i)
+        cout<<result[i]<<"|"<<result[i].size()<<endl;
+    return 0;
 }

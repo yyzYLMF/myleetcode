@@ -14,57 +14,57 @@
 using namespace std;
 
 class ListNode {
-	public:
-	int val;
-	ListNode *next;
-	ListNode(int x): val(x), next(NULL){}
+    public:
+    int val;
+    ListNode *next;
+    ListNode(int x): val(x), next(NULL){}
 };
 
 class Solution {
-	public:
-	ListNode *partition(ListNode *head, int x) {
-		ListNode *lhead,*ltail,*rhead,*rtail,*p;
+    public:
+    ListNode *partition(ListNode *head, int x) {
+        ListNode *lhead,*ltail,*rhead,*rtail,*p;
 
-		if(head==NULL || head->next==NULL)
-			return head;
-		lhead=ltail=NULL;
-		rhead=rtail=NULL;
-		p=head;
-		while(p!=NULL) {
-			if(p->val < x) {
-				if(lhead==NULL) {
-					lhead=p;
-					ltail=p;
-				}
-				else {
-					ltail->next=p;
-					ltail=ltail->next;
-				}
-			}
-			else {
-				if(rhead==NULL) {
-					rhead=p;
-					rtail=p;
-				}
-				else {
-					rtail->next=p;
-					rtail=rtail->next;
-				}
-			}
-			p=p->next;
-		}
-		if(lhead!=NULL) 
-			ltail->next=rhead;
-		if(rhead!=NULL)
-			rtail->next=NULL;
-		if(lhead!=NULL)
-			return lhead;
-		else
-			return rhead;
-	}
+        if(head==NULL || head->next==NULL)
+            return head;
+        lhead=ltail=NULL;
+        rhead=rtail=NULL;
+        p=head;
+        while(p!=NULL) {
+            if(p->val < x) {
+                if(lhead==NULL) {
+                    lhead=p;
+                    ltail=p;
+                }
+                else {
+                    ltail->next=p;
+                    ltail=ltail->next;
+                }
+            }
+            else {
+                if(rhead==NULL) {
+                    rhead=p;
+                    rtail=p;
+                }
+                else {
+                    rtail->next=p;
+                    rtail=rtail->next;
+                }
+            }
+            p=p->next;
+        }
+        if(lhead!=NULL) 
+            ltail->next=rhead;
+        if(rhead!=NULL)
+            rtail->next=NULL;
+        if(lhead!=NULL)
+            return lhead;
+        else
+            return rhead;
+    }
 };
 
 int main() {
-	Solution solu;
-	return 0;
+    Solution solu;
+    return 0;
 }
