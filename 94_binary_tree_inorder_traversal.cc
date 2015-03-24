@@ -81,12 +81,44 @@ class Solution2 {
     }
 };
 
+//Iterative method2(just one stack)
+class Solution3 {
+    public:
+    vector<int> inorderTraversal(TreeNode *root) {
+        stack<TreeNode*> st;
+        vector<int> result;
+        TreeNode* temp;
+
+        if(root==NULL)
+            return result;
+        temp=root;
+        while(temp) {
+            st.push(temp);
+            temp=temp->left;
+        }
+        while(!st.empty()) {
+            temp=st.top();
+            result.push_back(temp->val);
+            st.pop();
+            if(temp->right) {
+                temp=temp->right;
+                while(temp) {
+                    st.push(temp);
+                    temp=temp->left;
+                }
+            }
+        }
+        return result;
+    }
+};
+            
+
 int main() {
     Solution solu;
-    Solution2 solu2;
+    Solution3 solu3;
     vector<int> result;
     TreeNode mynode(1);
-    result=solu2.inorderTraversal(&mynode);
+    result=solu3.inorderTraversal(&mynode);
     for(int i=0;i<result.size();++i)
         cout<<result[i]<<" ";
     cout<<endl;
