@@ -50,7 +50,7 @@ class Solution {
     }
 };
 
-//Memory Limit Exceeded
+//AC
 class Solution2 {
     public:
     class Node {
