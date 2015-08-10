@@ -1,0 +1,35 @@
+Array:
+1.  two pointer题型，先对数组进行一些处理，然后在头和尾部分别设置标记位，然后分别向中间靠拢(靠拢的策略根据贪心的思想).(1_2Sum)
+2.  利用标记位，将元素放到它该放的地方.(41_first_missing_positive 75_Sort_colors)
+3.  类二分查找题目.(34_search_for_a_range)
+4.  根据题目意思找到track进行求解.(31_next_permutation 48_rotate_image)
+5.  按照题目意思操作，考察逻辑的严密性(56_merge_intervals)
+6.  简单的贪心和动态规划(55_jump_game 62-64_unique_path)
+7.  不申请额外空间处理问题(73_set_matrix_zeroes)
+8.  类似螺旋矩阵的题目，上下左右(79_word_search)
+9.  two pointer的进化，一半用贪心，另一半用动态规划(或贪心).(84_rectangle 123_stock3)
+10. 用数据结构map,set辅助完成的题目
+11. 2道很难题目(4,126)
+
+Linked_List:
+1.  按照题目意思操作链表，合并，删除，逆序，注意头尾的操作，现在纸上模拟(2_Add,24_swap,61_rotate)
+2.  快慢指针相关题目(19_Remove, 142_Linked_list_cycle2)
+3.  链表和树的结合(109_Convert)
+4.  链表的分治排序(可以使用快慢指针找中点)
+
+String:
+1.  根据题目一次操作(6_zigzag, 13_Roman)
+2.  字符串与排列组合相关问题，全排列，组合(17_Phone_number)
+3.  大数问题(43_Multiply)
+4.  基于栈的模拟问题(20_parentheses, 71_simplify_path)
+5.  动态规划问题(72_Edit_Distance, 97_Interleaving_String)
+6.  用map存储元素之前出现的位置(30_substring, 76_minimum)
+7.  4道难题(5,87,91,126)
+
+Divide_and_Conquer:
+1.  典型分治然后再合并来实现log(首先想到要用分治，接着如何分就成了关键)
+2.  有些题目很经典，但是更好的方法是使用贪心做
+
+Dynamic_Programming:
+1.  DP题目最大的关键是想到用DP如何划分子结构,接下来就是确定DP的维数和边界(有些时候一个题目会用到两个DP)
+2.  题目更多围绕字符串“匹配”、路径、最优问题
