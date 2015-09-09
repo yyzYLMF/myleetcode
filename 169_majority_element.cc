@@ -13,6 +13,28 @@ using namespace std;
 
 class Solution {
     public:
+    int majorityElement(vector<int>& nums) {
+        int i,last,count;
+        last = nums[0];
+        count = 1;
+        for(i=1; i<nums.size(); ++i) {
+            if(last != nums[i]) {
+                if(count == 0) {
+                    last = nums[i];
+                    count ++;
+                }
+                else
+                    count--;
+            }
+            else
+                count++;
+        }
+        return last;
+    }
+};
+
+class Solution2 {
+    public:
     int majorityElement(vector<int> &num) {
         map<int,int> mymap;
         int i,max_num=0,max_val;

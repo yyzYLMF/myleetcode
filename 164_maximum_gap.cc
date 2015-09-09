@@ -16,8 +16,61 @@
 #include <climits>
 using namespace std;
 
-//with map
+// BEST method
 class Solution {
+    public:
+    class Node {
+        public:
+        int min;
+        int max;
+        bool sign;
+        Node():min(INT_MAX),max(INT_MIN),sign(false){}
+    };
+    int maximumGap(vector<int> &num) {
+        int all_min,all_max;
+        Node *tmp;
+        int i,ret;
+        double dis;
+        if(num.size() <= 1)
+            return 0;
+        all_min = num[0];
+        all_max = num[0];
+        for(i=1;i<num.size();++i) {
+            if(num[i] < all_min)
+                all_min = num[i];
+            else if(num[i] > all_max)
+                all_max = num[i];
+        }
+        dis = (all_max - all_min)*1.0/((double)num.size());
+        tmp = new Node[num.size()+1];
+        for(i=0;i<num.size();++i) {
+            int pos = (num[i]-all_min)*1.0/dis;
+            if(tmp[pos].sign == false) {
+                tmp[pos].min = num[i];
+                tmp[pos].max = num[i];
+                tmp[pos].sign = true;
+            }
+            else {
+                if(num[i] > tmp[pos].max)
+                    tmp[pos].max = num[i];
+                else if(num[i] < tmp[pos].min)
+                    tmp[pos].min = num[i];
+            }
+        }
+        int last = tmp[0].max;
+        ret = 0;
+        for(i=1;i<=num.size();++i) {
+            if(tmp[i].sign == true) {
+                ret = max(ret,tmp[i].min - last);
+                last = tmp[i].max;
+            }
+        }
+        return ret;
+    }
+};
+
+//with map, Not best
+class Solution3 {
     public:
     int maximumGap(vector<int> &num) {
         map<int,int> store;
@@ -41,7 +94,7 @@ class Solution {
     }
 };
 
-//without map
+//without map Not best
 class Solution2 {
     public:
     class Node {
@@ -112,6 +165,10 @@ class Solution2 {
 };
 
 int main() {
-    Solution2 solu;
+    Solution solu;
+    vector<int> input;
+    input.push_back(1);
+    input.push_back(1000000);
+    cout<<solu.maximumGap(input)<<endl;
     return 0;
 }
