@@ -1,83 +1,73 @@
 #include <iostream>
-#include <cstdlib>
-#include <climits>
+#include <stack>
 using namespace std;
-
-int store[80][80];
-int ret,n,m;
-
-int mydeal(int n1,int n2,int n3,int m1, int m2, int m3) {
-	int ret=INT_MAX,i,j;
-	for(j=0;j<m;++j) {
-		for(i=n1-1;i>0;--i) {
-			store[i-1][j] += store[i][j];
-			store[i][j] = 0;
-		}
-		for(i=n2-1;i>n1;--i) {
-			store[i-1][j] += store[i][j];
-			store[i][j] = 0;
-		}
-		for(i=n3-1;i>n2;--i) {
-			store[i-1][j] += store[i][j];
-			store[i][j] = 0;
-		}
-		for(i=n-1;i>n3;--i) {
-			store[i-1][j] += store[i][j];
-			store[i][j] = 0;
-		}
-	}
-	for(j=m1-1;j>0;--j) {
-		store[0][j-1] = store[0][j];
-		store[0][j] = 0;
-		store[n1][j-1] = store[n1][j];
-		store[n1][j] = 0;
-		store[n2][j-1] = store[n2][j];
-		store[n2][j] = 0;
-		store[n3][j-1] = store[n3][j];
-		store[n3][j] = 0;
-	}
-	for(i=0;i<n;++i) {
-		for(j=0;j<m;++j) {
-			if(store[i][j] == 0)
-				continue;
-			else {
-				if(ret > store[i][j])
-					ret = store[i][j];
-			}
-		}
-	}
-	return ret;
+struct TreeNode
+{
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int v) : val(v), left(NULL), right(NULL) {}
+};
+bool IsPart(TreeNode *root1, TreeNode *root2)
+{
+    if (root2 == NULL)
+        return root1==NULL?true:false;
+    if (root1 == NULL)
+        return root2==NULL?true:false;
+    if (root1->val != root2->val)
+        return false;
+    return IsPart(root1->left, root2->left) &&
+        IsPart(root1->right, root2->right);
+}
+bool IsPartTree(TreeNode *root1, TreeNode *root2)
+{
+    bool result = false;
+    if (root1 != NULL && root2 != NULL)
+    {
+        if (root1->val == root2->val)
+            result = IsPart(root1, root2);
+        if (!result)
+            result = IsPartTree(root1->left, root2);
+        if (!result)
+            result = IsPartTree(root1->right, root2);
+    }
+    return result;
+}
+TreeNode* createTree1()
+{
+    TreeNode *root = new TreeNode(5);
+    TreeNode *p1 = new TreeNode(3);
+    TreeNode *p2 = new TreeNode(7);
+    TreeNode *p3 = new TreeNode(2);
+    TreeNode *p4 = new TreeNode(4);
+    TreeNode *p5 = new TreeNode(6);
+    TreeNode *p6 = new TreeNode(5);
+	root->left = p1;
+    root->right = p2;
+    p1->left = p3;
+    p1->right = p4;
+    p2->left = p5;
+    p2->right = p6;
+    return root;
+}
+TreeNode* createTree2()
+{
+    TreeNode *root = new TreeNode(5);
+    TreeNode *p1 = new TreeNode(3);
+    TreeNode *p2 = new TreeNode(7);
+    root->left = p1;
+    root->right = p2;
+    return root;
 }
 
-int main() {
-	int i,j,temp;
-	
-	while(cin>>n) {
-		cin>>m;
-		ret = 10;
-		for(i=0;i<n;++i) {
-			for(j=0;j<m;++j) {
-				cin>>temp;
-				store[i][j] = temp;
-				if(temp < ret)
-					ret = temp;
-			}
-		}
-		for(int n1=0;n1<n-3;++n1) {
-			for(int n2=n1+1;n2<n-2;++n2) {
-				for(int n3=n2+1;n3<n-1;++n3) {
-					for(int m1=0;m1<m-3;++m1) {
-						for(int m2=m1+1;m2<m-2;++m2) {
-							for(int m3=m2+1;m3<m-1;++m3) {
-								temp = mydeal(n1,n2,n3,m1,m2,m3);
-								if(temp > ret)
-									ret = temp;
-							}
-						}
-					}
-				}
-			}
-		}
-		cout<<ret<<endl;
+int main()
+{
+    TreeNode *root1 = createTree1();
+    TreeNode *root2 = createTree2();
+    if(IsPartTree(root1, root2)){
+    	cout<<"Yes"<<endl;
+	}
+	else {
+		cout<<"No"<<endl;
 	}
 }
