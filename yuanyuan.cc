@@ -1,73 +1,42 @@
 #include <iostream>
-#include <stack>
+#include <cstdlib>
+#include <map>
+#include <vector>
+#include <string>
+#include <algorithm>
 using namespace std;
-struct TreeNode
-{
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-    TreeNode(int v) : val(v), left(NULL), right(NULL) {}
-};
-bool IsPart(TreeNode *root1, TreeNode *root2)
-{
-    if (root2 == NULL)
-        return root1==NULL?true:false;
-    if (root1 == NULL)
-        return root2==NULL?true:false;
-    if (root1->val != root2->val)
-        return false;
-    return IsPart(root1->left, root2->left) &&
-        IsPart(root1->right, root2->right);
-}
-bool IsPartTree(TreeNode *root1, TreeNode *root2)
-{
-    bool result = false;
-    if (root1 != NULL && root2 != NULL)
-    {
-        if (root1->val == root2->val)
-            result = IsPart(root1, root2);
-        if (!result)
-            result = IsPartTree(root1->left, root2);
-        if (!result)
-            result = IsPartTree(root1->right, root2);
-    }
-    return result;
-}
-TreeNode* createTree1()
-{
-    TreeNode *root = new TreeNode(5);
-    TreeNode *p1 = new TreeNode(3);
-    TreeNode *p2 = new TreeNode(7);
-    TreeNode *p3 = new TreeNode(2);
-    TreeNode *p4 = new TreeNode(4);
-    TreeNode *p5 = new TreeNode(6);
-    TreeNode *p6 = new TreeNode(5);
-	root->left = p1;
-    root->right = p2;
-    p1->left = p3;
-    p1->right = p4;
-    p2->left = p5;
-    p2->right = p6;
-    return root;
-}
-TreeNode* createTree2()
-{
-    TreeNode *root = new TreeNode(5);
-    TreeNode *p1 = new TreeNode(3);
-    TreeNode *p2 = new TreeNode(7);
-    root->left = p1;
-    root->right = p2;
-    return root;
-}
 
-int main()
-{
-    TreeNode *root1 = createTree1();
-    TreeNode *root2 = createTree2();
-    if(IsPartTree(root1, root2)){
-    	cout<<"Yes"<<endl;
+int main() {
+	int n,m,tmp,min,max;
+	string stmp;
+	vector<int> value;
+	vector<int> num;
+	map<string,int> mt;
+	
+	cin>>n>>m;
+	for(int i=0;i<n;++i) {
+		cin>>tmp;
+		value.push_back(tmp);
 	}
-	else {
-		cout<<"No"<<endl;
+	for(int i=0;i<m;++i) {
+		cin>>stmp;
+		mt[stmp]++;
 	}
+	map<string,int>::iterator it = mt.begin();
+	while(it != mt.end()) {
+		tmp = it->second;
+		num.push_back(tmp);
+		++it;
+	}
+	sort(value.begin(),value.end());
+	sort(num.begin(),num.end());
+	min = 0;
+	max = 0;
+	for(int i=num.size()-1,j=0; i>=0; --i,++j) {
+		min += num[i]*value[j];
+	}
+	for(int i=num.size()-1,j=value.size()-1; i>=0; --i,--j) {
+		max += num[i]*value[j];
+	}
+	cout<<min<<" "<<max<<endl;
 }
