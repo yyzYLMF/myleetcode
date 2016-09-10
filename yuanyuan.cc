@@ -106,7 +106,7 @@ void myDel(int num) {
 }
 
 void myDef() {
-	list<Mem> it=m_free.begin();
+	list<Mem>::iterator it=m_free.begin();
 	int v=0;
 	while(it!=m_free.end()) {
 		v=v+it->size;
