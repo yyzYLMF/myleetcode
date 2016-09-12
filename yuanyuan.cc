@@ -1,25 +1,37 @@
 #include <iostream>
 #include <cstdlib>
-#include <string>
+#include <cstdio>
+#include <cstring>
+#include <algorithm>
 using namespace std;
 
-int main() {
-    int input,low,high,mid,limit;
-    string str = "";
-    cin>>input;
-    low = -90;
-    high = 90;
-    limit = 6;
-    for(int i=0;i<limit;++i) {
-        mid = (low+high)/2;
-        if(input >= mid) {
-            str.insert(str.end(),'1');
-            low = mid;
-        } else {
-            str.insert(str.end(),'0');
-            high = mid;
-        }
+class Solution {
+public:
+    int longestPrefixPalindrome(string s) {
+		int len = s.length();
+		if (len < 2)
+			return len;
+		int longest = 1, start, end;
+		for (int begin = 0; begin <= len / 2;) {
+			start = end = begin;
+			while (end < len - 1 && s[end + 1] == s[end])
+				++end;
+			begin = end + 1;
+			while (end < len - 1 && start > 0 && s[end + 1] == s[start - 1]) {
+				++end;
+				--start;
+			}
+			if (start == 0 && longest < end - start + 1)
+				longest = end - start + 1;
+		}
+		return longest;
     }
-    cout<<str<<endl;
-    return 0;
+};
+
+int main() {
+	Solution solu;
+	string str;
+	cin>>str;
+	cout<<solu.longestPrefixPalindrome(str)<<endl;
+	return 0;
 }
