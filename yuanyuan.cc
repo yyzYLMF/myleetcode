@@ -1,82 +1,66 @@
 #include <iostream>
+#include <cstdlib>
+#include <string>
+#include <cmath>
+#include <set>
 using namespace std;
 
+int dp[50][50];
 
-//模板类
-template <typename T,int num>
-class Queue
-{
-private:
-        T arr[num];
-        int front;
-        int rear;
-public:
-        Queue() //构造函数
-        {
-         front=0;
-         rear=0;
-        }
-
-        bool isEmpty();//判断队列是否为空
-        bool isFull();//判断队列是否为满
-        bool push(const T &);//进队列
-        bool pop(T &);//出队列 这里的参数一定是引用 因为要改变其本身
-};
-
-template <typename T,int  num>
-bool Queue<T,num>::isEmpty()
-{
-        return front==rear;
+bool func(string ss, int s, int e) {
+	int i,j;
+	if((e-s)%2==0) {
+		return false;
+	}
+	i=s;
+	j= ceil(((double)(s+e))/2.0);
+	for(;j<=e;++i,++j) {
+		if(ss[i] != ss[j]) {
+			break;
+		}
+	}
+	if(j<=e)
+		return false;
+	else 
+		return true;
 }
 
-template<typename T,int num>
-bool Queue<T,num>::isFull()
-{
-        return front==num;
-}
-
-template<typename T,int num> //进队列 判断队列是否满
-bool Queue<T,num>::push(const T &a)
-{
-        if(isFull())
-        {
-         cout<<"队列已满"<<endl;
-         return false;
-        }
-        else
-        {
-         arr[front]=a;
-         ++front;
-        }
-        return true;
-}
-
-template<typename T,int num>
-bool Queue<T,num>::pop(T &b)
-{
-        if(isEmpty())
-        {
-         cout<<"队列空了"<<endl;
-         return false;
-        }
-        else
-        {
-         b=arr[rear];
-         ++rear;
-        }
-        return true;
-}
-
-int main()
-{
-        Queue<int,7> q;  //开7个空间
-        cout<<"刚开始队列空吗?  "<<q.isEmpty()<<endl;
-        q.push(6);
-        q.push(10);
-        cout<<"现在还是队列空吗?  "<<q.isFull()<<endl;
-        int b1,b2;
-        q.pop(b1);
-        q.pop(b2);
-        cout<<"队列中第一个删除的元素为:  "<<b1<<endl;
-        cout<<"队列中第二个删除的元素为:  "<<b2<<endl;
+int main() {
+	int i,j;
+	string ss;
+	set<string> mset;
+	cin>>ss;
+	if(ss.size() <= 1) {
+		cout<<0<<endl;
+		return 0;
+	}
+	for(i=0;i<50;++i) {
+		for(j=0;j<50;++j) {
+			dp[i][j] = 0;
+		}
+	}
+	int ret = 0;
+	for(i=0;i<ss.size();++i) {
+		for(j=i+1;j<ss.size();++j) {
+			
+			if(i!=0 && dp[i-1][j]==1) {
+				continue;
+			}
+			if(dp[i][j-1]==1) {
+				continue;
+			}
+			//cout<<i<<" "<<j<<endl;
+			if(func(ss,i,j)) {
+				//cout<<i<<" true "<<j<<endl;
+				dp[i][j] = 1;
+				string tmp =ss.substr(i,j-i+1);
+				if(mset.count(tmp) == 0) {
+					ret++;
+					mset.insert(tmp);
+				}
+			}
+		}
+	}
+	cout<<ret<<endl;
+	return 0;
 }
